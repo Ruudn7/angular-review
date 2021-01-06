@@ -1,7 +1,7 @@
 <div class="container">
   <nav class="row">
     <div class="nav-wrapper">
-      <span class="brand-logo center">{{ title }}</span>
+      <span class="brand-logo center">{{ config?.title | uppercase }}</span>
     </div>
   </nav>
 
@@ -44,16 +44,8 @@
   <footer class="page-footer mt-5">
     <div class="footer-copyright">
       <div class="container">
-        {{ footer }}
+        {{ config?.date | date:'yyyy' }} {{ config?.footer }}
       </div>
     </div>
   </footer>
 </div>
-
-<h1>Simple Counter</h1>
-
-<h4>{{ getInfo() }}</h4>
-
-<h4>{{counter}}</h4>
-
-<button (click)="count()"> Click</button>
