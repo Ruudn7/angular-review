@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular-review';
+  title = 'Lista zadań';
+
+  get footer(): string {
+    return '2020 © Lista zadań,All rights reserved.';
+  }
 }
