@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  taskName = '';
   config: { [key: string]: string } = {};
+  scale = 1;
   tasks: Task[] = [
     {
       name: 'Siłownia',
@@ -41,19 +41,17 @@ export class AppComponent {
     this.tasks = [];
   }
 
-  onKeyUp(event: KeyboardEvent): void {
-    const target = event.target as HTMLInputElement;
-
-    this.taskName = target.value;
-  }
-
-  createTask(): void {
+  createTask(name: string, date: string): void {
     const task: Task = {
-      name: this.taskName,
-      deadline: new Date().toDateString(),
+      name,
+      deadline: date,
       done: false
     };
     this.tasks.push(task);
-    this.taskName = '';
+  }
+
+  zoom(deltaY: number): void {
+    const direction = deltaY < 0 ? -1 : 1;
+    this.scale += 0.1 * direction;
   }
 }

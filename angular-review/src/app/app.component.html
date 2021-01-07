@@ -15,10 +15,14 @@
       class="col s8"
       type="text"
       placeholder="Dodaj zadanie i datę wykonania"
-      (keyup)="onKeyUp($event)"
+      #nameInput
     />
-    <input class="col s2 disabled" type="date" />
-    <button class="btn-floating" (click)="createTask()">+</button>
+    <input class="col s2 disabled" type="date" #dataInput />
+    <button class="btn-floating" (click)="
+      createTask(nameInput.value, dataInput.value);
+      nameInput.value = '';
+      dataInput.value = ''"
+    >+</button>
   </div>
 
   <ul class="collection">
@@ -49,4 +53,15 @@
       </div>
     </div>
   </footer>
+</div>
+
+
+<div
+  class="scale-transformm-wheel"
+  (wheel)="zoom($event.deltaY); $event.preventDefault()"
+  [style.transform]="'scale('+ scale +')'"
+>
+  zakręć kółkiem
+  {{ scale }}
+
 </div>
