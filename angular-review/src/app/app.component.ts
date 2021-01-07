@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  editMode = false;
   taskName = 'sugerowane zadanie do wykonania';
   taskDate = '';
   config: { [key: string]: string } = {};
@@ -54,4 +55,7 @@ export class AppComponent {
     this.taskDate = '';
   }
 
+  switchEditMode(): void {
+    this.editMode = !this.editMode;
+  }
 }
