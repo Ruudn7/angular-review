@@ -37,6 +37,7 @@ export class AppComponent {
         date: new Date().toDateString()
       };
     }, 500);
+    this.sortTasks();
   }
 
   clearTasks(): void {
@@ -53,9 +54,26 @@ export class AppComponent {
 
     this.taskName = '';
     this.taskDate = '';
+    this.sortTasks();
   }
 
   switchEditMode(): void {
     this.editMode = !this.editMode;
+  }
+
+  markTaskAsDone(task: Task): void {
+    task.done = true;
+    this.sortTasks();
+  }
+
+  removeTask(task: Task): void {
+    this.tasks = this.tasks.filter(el => el !== task);
+    this.sortTasks();
+  }
+
+  private sortTasks(): void {
+    this.tasks = this.tasks.sort( (a: Task, b: Task): number =>
+      a.done === b.done ? 0 : a.done ? 1 : -1
+    );
   }
 }
