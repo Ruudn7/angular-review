@@ -7,8 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  taskName = 'sugerowane zadanie do wykonania';
+  taskDate = '';
   config: { [key: string]: string } = {};
-  scale = 1;
   tasks: Task[] = [
     {
       name: 'Siłownia',
@@ -41,17 +42,16 @@ export class AppComponent {
     this.tasks = [];
   }
 
-  createTask(name: string, date: string): void {
+  createTask(): void {
     const task: Task = {
-      name,
-      deadline: date,
+      name: this.taskName,
+      deadline: this.taskDate,
       done: false
     };
     this.tasks.push(task);
+
+    this.taskName = '';
+    this.taskDate = '';
   }
 
-  zoom(deltaY: number): void {
-    const direction = deltaY < 0 ? -1 : 1;
-    this.scale += 0.1 * direction;
-  }
 }

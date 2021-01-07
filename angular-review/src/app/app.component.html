@@ -15,14 +15,22 @@
       class="col s8"
       type="text"
       placeholder="Dodaj zadanie i datę wykonania"
-      #nameInput
+      [(ngModel)]="taskName"
     />
-    <input class="col s2 disabled" type="date" #dataInput />
+    <input
+      class="col s2 disabled"
+      type="date"
+      [(ngModel)]="taskDate"
+    />
     <button class="btn-floating" (click)="
-      createTask(nameInput.value, dataInput.value);
-      nameInput.value = '';
-      dataInput.value = ''"
-    >+</button>
+        createTask();
+        taskName = '';
+        taskDate = ''
+      "
+      [disabled]="taskName === '' || taskDate === ''"
+    >
+      +
+    </button>
   </div>
 
   <ul class="collection">
@@ -44,7 +52,7 @@
 
   <h1>Dzisiaj brak zadań :-)</h1>
 
-  <button class="btn red" (click)="clearTasks()">Wyczyść</button>
+  <button class="btn red" (click)="clearTasks()" [disabled]="tasks.length === 0">Wyczyść</button>
 
   <footer class="page-footer mt-5">
     <div class="footer-copyright">
@@ -56,12 +64,3 @@
 </div>
 
 
-<div
-  class="scale-transformm-wheel"
-  (wheel)="zoom($event.deltaY); $event.preventDefault()"
-  [style.transform]="'scale('+ scale +')'"
->
-  zakręć kółkiem
-  {{ scale }}
-
-</div>
