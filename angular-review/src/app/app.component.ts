@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  taskName = '';
   config: { [key: string]: string } = {};
   tasks: Task[] = [
     {
@@ -26,17 +27,6 @@ export class AppComponent {
     },
   ];
 
-  list = ['jeden', 'dwa', 'trzy', 'cztery', 'pięc'];
-  weeks = {
-    monday: 'Poniedziałek',
-    tuesday: 'Wtorek',
-    wednesday: 'Środa',
-    thuesday: 'Czwartek',
-    friday: 'Piątek',
-    saturday: 'Sobota',
-    sunday: 'Niedziela'
-  };
-
   constructor() {
     setTimeout( () => {
       this.config = {
@@ -45,6 +35,25 @@ export class AppComponent {
         date: new Date().toDateString()
       };
     }, 500);
+  }
 
+  clearTasks(): void {
+    this.tasks = [];
+  }
+
+  onKeyUp(event: KeyboardEvent): void {
+    const target = event.target as HTMLInputElement;
+
+    this.taskName = target.value;
+  }
+
+  createTask(): void {
+    const task: Task = {
+      name: this.taskName,
+      deadline: new Date().toDateString(),
+      done: false
+    };
+    this.tasks.push(task);
+    this.taskName = '';
   }
 }
